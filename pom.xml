@@ -8,10 +8,9 @@
 		<version>2.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>BigBull</artifactId>
+	<artifactId>VConnect</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>BigBull</name>
+	<name>VConnect</name>
 	<description>Fantasy project</description>
 	<properties>
 		<java.version>11</java.version>
@@ -41,11 +40,7 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 		</dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>BigBull</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
