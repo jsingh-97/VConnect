@@ -1,6 +1,6 @@
 package VConnect.Controllers;
 
-import VConnect.Aggregator.AuthAggregator;
+import VConnect.Aggregator.Service.AuthAggregator;
 import VConnect.Aggregator.Request.SignUpRequest;
 import VConnect.Response.Auth.AuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ public class AuthController {
     private AuthAggregator authAggregator;
     @GetMapping("/")
     public String healthCheck(){
-        return "ok";
+        return "Welcome to VConnect";
     }
 
     @GetMapping("/auth/user")

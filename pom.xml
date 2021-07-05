@@ -11,7 +11,7 @@
 	<artifactId>VConnect</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>VConnect</name>
-	<description>Fantasy project</description>
+	<description>project</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
