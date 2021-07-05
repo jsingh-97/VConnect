@@ -1,4 +1,4 @@
-package VConnect.Aggregator;
+package VConnect.Aggregator.Service;
 
 import VConnect.Aggregator.Request.SignUpRequest;
 import VConnect.Response.Auth.AuthResponse;

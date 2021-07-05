@@ -1,50 +1,36 @@
 package VConnect.Model.Auth;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name= "userdata")
+@Getter@Setter@AllArgsConstructor
 public class UserData {
-    @Column(name="username")
-    private String username;
+    @Column(name="name")
+    private String name;
     @Id
-    @Column(name="useremail")
+    @Column(name="email")
     private String email;
     @Column(name="password")
     private String password;
+    @Column(name="phone")
+    private String phone;
+    @Column(name="designation")
+    private String designation;
+    @Column(name="city")
+    private String city;
+    @Column(name="company")
+    private String company;
 
-    public UserData(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
-
+    @Column(name="school")
+    private String school;
+    @Column(name="course")
+    private String course;
     public UserData() {
     }
 
-    public String getUsername() {
-        return username;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

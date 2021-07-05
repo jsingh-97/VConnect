@@ -1,5 +1,5 @@
 # VConnect
-VConnect is platfrom where you can with your company alumni or University alumni.
+VConnect is platform where you can with your company alumni or University alumni.
 Features
 1. SignUp/Login
 2. Follow/Unfollow People
