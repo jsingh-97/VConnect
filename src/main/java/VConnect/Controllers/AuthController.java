@@ -2,7 +2,7 @@ package VConnect.Controllers;
 
 import VConnect.Aggregator.Service.AuthAggregator;
 import VConnect.Aggregator.Request.SignUpRequest;
-import VConnect.Response.Auth.AuthResponse;
+import VConnect.Aggregator.Response.Auth.AuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

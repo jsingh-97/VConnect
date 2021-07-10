@@ -1,4 +1,4 @@
-package VConnect.Response.Connections;
+package VConnect.Aggregator.Response.Connections;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

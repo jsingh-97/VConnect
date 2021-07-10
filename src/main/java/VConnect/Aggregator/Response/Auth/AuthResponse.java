@@ -1,4 +1,4 @@
-package VConnect.Response.Auth;
+package VConnect.Aggregator.Response.Auth;
 
 import VConnect.Model.Auth.UserData;
 import lombok.Getter;
