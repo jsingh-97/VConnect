@@ -2,9 +2,7 @@ package VConnect.Controllers;
 
 import VConnect.Aggregator.Request.ConnectionRequest;
 import VConnect.Aggregator.Service.ConnectionsAggregator;
-import VConnect.Model.Auth.UserData;
-import VConnect.Model.User.Connections;
-import VConnect.Response.Connections.ConnectionsResponse;
+import VConnect.Aggregator.Response.Connections.ConnectionsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

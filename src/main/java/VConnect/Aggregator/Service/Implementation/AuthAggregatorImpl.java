@@ -3,7 +3,7 @@ package VConnect.Aggregator.Service.Implementation;
 import VConnect.Aggregator.Request.SignUpRequest;
 import VConnect.Aggregator.Service.AuthAggregator;
 import VConnect.Model.Auth.UserData;
-import VConnect.Response.Auth.AuthResponse;
+import VConnect.Aggregator.Response.Auth.AuthResponse;
 import VConnect.Respository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,9 +1,7 @@
 package VConnect.Aggregator.Service;
 
 import VConnect.Aggregator.Request.ConnectionRequest;
-import VConnect.Model.Auth.UserData;
-import VConnect.Model.User.Connections;
-import VConnect.Response.Connections.ConnectionsResponse;
+import VConnect.Aggregator.Response.Connections.ConnectionsResponse;
 
 import java.util.List;
 

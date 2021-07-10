@@ -2,9 +2,8 @@ package VConnect.Aggregator.Service.Implementation;
 
 import VConnect.Aggregator.Request.ConnectionRequest;
 import VConnect.Aggregator.Service.ConnectionsAggregator;
-import VConnect.Model.Auth.UserData;
 import VConnect.Model.User.Connections;
-import VConnect.Response.Connections.ConnectionsResponse;
+import VConnect.Aggregator.Response.Connections.ConnectionsResponse;
 import VConnect.Respository.ConnectionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
