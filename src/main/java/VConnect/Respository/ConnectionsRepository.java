@@ -13,5 +13,7 @@ import java.util.List;
 @Repository
 public interface ConnectionsRepository extends JpaRepository<Connections, ConnectionsPK> {
     @Query(value="Select follower FROM connections where followee=:email",nativeQuery = true)
-    List<String> findByEmail(@Param("email") String email);
+    List<String> findFollowers(@Param("email") String email);
+    @Query(value="Select followee FROM connections where follower=:email",nativeQuery = true)
+    List<String> findFollowee(@Param("email") String email);
 }
