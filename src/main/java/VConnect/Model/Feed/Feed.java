@@ -44,4 +44,7 @@ public class Feed {
     description=postFeedRequest.getDescription();
     timestamp=postFeedRequest.getTimestamp();
     }
+
+    public Feed() {
+    }
 }

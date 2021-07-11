@@ -18,7 +18,7 @@ public class ConnectionsAggregatorImpl implements ConnectionsAggregator {
 
     @Override
     public List<String> getFollowers(String email) {
-        return connectionsRepository.findByEmail(email);
+        return connectionsRepository.findFollowers(email);
     }
 
     @Override
