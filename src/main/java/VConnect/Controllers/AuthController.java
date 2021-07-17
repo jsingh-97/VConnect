@@ -33,4 +33,8 @@ public class AuthController {
             @RequestParam(value = "email", required = true) String email){
         return authAggregator.deleteUser(email);
     }
+    @GetMapping("/auth/user/confirmToken")
+    public String confirmToken(@RequestParam("token") String token){
+        return authAggregator.confirmToken(token);
+    }
 }
