@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -18,13 +19,19 @@ public class ConfirmationToken {
     private Integer id;
     @Column(name="token")
     private String token;
-    @Column(name="createdAt")
-    private Timestamp createdAt;
-    @Column(name="expiresAt")
-    private Timestamp expiresAt;
-    @Column(name="confirmedAt")
-    private Timestamp confirmedAt;
+    @Column(name="created_at")
+    private LocalDateTime createdAt;
+    @Column(name="expires_at")
+    private LocalDateTime expiresAt;
+    @Column(name="confirmed_at")
+    private LocalDateTime confirmedAt;
     @Column(name="email")
     private String email;
-
+   public ConfirmationToken(String token,LocalDateTime createdAt,LocalDateTime expiresAt,LocalDateTime confirmedAt,String email){
+        this.token=token;
+        this.createdAt=createdAt;
+        this.expiresAt=expiresAt;
+        this.confirmedAt=confirmedAt;
+        this.email=email;
+   }
 }
