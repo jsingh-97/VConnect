@@ -11,6 +11,7 @@ import VConnect.Respository.Service.UserService;
 import VConnect.Respository.UserRepository;
 import VConnect.lib.Email.EmailSender;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,8 @@ public class AuthAggregatorImpl implements AuthAggregator {
     ConfirmationTokenService confirmationTokenService;
     @Autowired
     EmailSender emailSender;
+    @Value("${VCONNECT_BASE_URL}")
+    private String vconnectBaseUrl;
     public AuthResponse getUserDetails(String email,String password){
         UserData userData = userService.findByEmail(email);
         AuthResponse authResponse = new AuthResponse();
@@ -60,7 +63,7 @@ public class AuthAggregatorImpl implements AuthAggregator {
             ConfirmationToken confirmationToken=new ConfirmationToken(token, LocalDateTime.now(),LocalDateTime.now().plusMinutes(5),null,signUpRequest.getEmail());
             confirmationTokenService.addToken(confirmationToken);
             //sending email to user
-            String link = "http://localhost:5000/auth/user/confirmToken?token=" + token;
+            String link = vconnectBaseUrl+"/auth/user/confirmToken?token=" + token;
 
             emailSender.send(signUpRequest.getEmail(),buildEmail(signUpRequest.getName(),link));
             return new AuthResponse("Please verify your email address to complete the registration process");
