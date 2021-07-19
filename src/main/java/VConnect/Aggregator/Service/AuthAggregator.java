@@ -7,4 +7,6 @@ public interface AuthAggregator {
      AuthResponse getUserDetails(String email,String password);
      AuthResponse registerUser(SignUpRequest signUpRequest);
      AuthResponse deleteUser(String email);
+
+    String confirmToken(String token);
 }

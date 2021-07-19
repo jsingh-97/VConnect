@@ -29,8 +29,13 @@ public class UserData {
     private String school;
     @Column(name="course")
     private String course;
+    @Column(name="enabled")
+    private boolean enabled;
     public UserData() {
     }
 
 
+    public boolean getEnabled() {
+        return enabled;
+    }
 }

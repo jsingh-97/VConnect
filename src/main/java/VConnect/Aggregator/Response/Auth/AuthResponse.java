@@ -1,9 +1,11 @@
 package VConnect.Aggregator.Response.Auth;
 
 import VConnect.Model.Auth.UserData;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter@Setter
 public class AuthResponse {
     private String username;
