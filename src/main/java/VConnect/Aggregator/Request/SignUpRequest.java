@@ -17,11 +17,11 @@ public class SignUpRequest {
     private String phone;
     @JsonProperty("designation")
     private String designation;
-    @JsonProperty(value = "city",required = true)
+    @JsonProperty(value = "city")
     private String city;
     @JsonProperty(value = "company")
     private String company;
-    @JsonProperty(value = "school",required = true)
+    @JsonProperty(value = "school")
     private String school;
     @JsonProperty("course")
     private String course;
