@@ -32,35 +32,41 @@ public class AuthAggregatorImpl implements AuthAggregator {
     @Value("${VCONNECT_BASE_URL}")
     private String vconnectBaseUrl;
     public AuthResponse getUserDetails(String email,String password){
-        UserData userData = userService.findByEmail(email);
         AuthResponse authResponse = new AuthResponse();
-        if(userData==null ||  !userData.getPassword().equals(password))
-        {
-            authResponse.setIsLogged(false);
-            authResponse.setText("Invalid username and password");
-            return authResponse;
-        }
-        if(userData.getEnabled()==false) {
-            authResponse.setIsLogged(false);
-            authResponse.setText("Please verify your email to complete registration process or try registering again if the link has expired");
+
+            Boolean emailExists = userService.emailExists(email);
+            if (emailExists){
+            UserData userData = userService.findByEmail(email);
+            if(!password.equals(userData.getPassword())){
+                authResponse.setIsLogged(false);
+                authResponse.setText("Invalid username and password");
+            }
+            else if(userData.getEnabled()==true) {
+                authResponse.setIsLogged(true);
+                authResponse.setText("Welcome");
+            }
+            else{
+                authResponse.setIsLogged(false);
+                authResponse.setText("Please verify your email to complete registration process or try registering again if the link has expired");
+            }
         }
         else{
-            authResponse.setIsLogged(true);
-            authResponse.setText("Welcome");
+            authResponse.setIsLogged(false);
+            authResponse.setText("Invalid username and password");
         }
         return authResponse;
     }
     public  AuthResponse registerUser(SignUpRequest signUpRequest) {
         Boolean userExists = userService.emailExists(signUpRequest.getEmail());
-        if(userExists) {
-            return new AuthResponse("This User is already registered. Check your email to verify the registration");
+        if(userExists==true) {
+            return new AuthResponse("This User is already registered. Check your email to verify the registration or login");
         }
-        UserData userData = new UserData(signUpRequest.getName(), signUpRequest.getEmail(), signUpRequest.getPassword(), signUpRequest.getPhone(), signUpRequest.getDesignation(), signUpRequest.getCity(), signUpRequest.getCompany(), signUpRequest.getSchool(), signUpRequest.getCourse(),false);
+        UserData userDataNew = new UserData(signUpRequest.getName(), signUpRequest.getEmail(), signUpRequest.getPassword(), signUpRequest.getPhone(), signUpRequest.getDesignation(), signUpRequest.getCity(), signUpRequest.getCompany(), signUpRequest.getSchool(), signUpRequest.getCourse(),false);
         try {
-            userService.registerUser(userData);
+            userService.registerUser(userDataNew);
             String token = UUID.randomUUID().toString();
             //generating token for session
-            ConfirmationToken confirmationToken=new ConfirmationToken(token, LocalDateTime.now(),LocalDateTime.now().plusMinutes(5),null,signUpRequest.getEmail());
+            ConfirmationToken confirmationToken=new ConfirmationToken(token, LocalDateTime.now(),LocalDateTime.now().plusMinutes(10),null,signUpRequest.getEmail());
             confirmationTokenService.addToken(confirmationToken);
             //sending email to user
             String link = vconnectBaseUrl+"/auth/user/confirmToken?token=" + token;
@@ -88,8 +94,10 @@ public class AuthAggregatorImpl implements AuthAggregator {
                 return "Token not found.Try registering again";
             if(confirmationToken.getConfirmedAt()!=null)
                 return "Email is already verified";
-            if(confirmationToken.getExpiresAt().isBefore(LocalDateTime.now()))
+            if(confirmationToken.getExpiresAt().isBefore(LocalDateTime.now())) {
+                userService.deleteByEmail(confirmationToken.getEmail());
                 return "This link is expired.Try registering again";
+            }
             confirmationTokenService.setConfirmedAt(token);
             userService.verifyUser(confirmationToken.getEmail());
             return "confirmed";
