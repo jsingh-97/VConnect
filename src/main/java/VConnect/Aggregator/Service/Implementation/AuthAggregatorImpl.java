@@ -59,24 +59,29 @@ public class AuthAggregatorImpl implements AuthAggregator {
     public  AuthResponse registerUser(SignUpRequest signUpRequest) {
         Boolean userExists = userService.emailExists(signUpRequest.getEmail());
         if(userExists==true) {
-            return new AuthResponse("This User is already registered. Check your email to verify the registration or login");
+            generateAndSendToken(signUpRequest);
+            return new AuthResponse("This User is already registered. Check your email to complete the registration or login if you have already completed");
         }
         UserData userDataNew = new UserData(signUpRequest.getName(), signUpRequest.getEmail(), signUpRequest.getPassword(), signUpRequest.getPhone(), signUpRequest.getDesignation(), signUpRequest.getCity(), signUpRequest.getCompany(), signUpRequest.getSchool(), signUpRequest.getCourse(),false);
         try {
             userService.registerUser(userDataNew);
-            String token = UUID.randomUUID().toString();
-            //generating token for session
-            ConfirmationToken confirmationToken=new ConfirmationToken(token, LocalDateTime.now(),LocalDateTime.now().plusMinutes(10),null,signUpRequest.getEmail());
-            confirmationTokenService.addToken(confirmationToken);
-            //sending email to user
-            String link = vconnectBaseUrl+"/auth/user/confirmToken?token=" + token;
-
-            emailSender.send(signUpRequest.getEmail(),buildEmail(signUpRequest.getName(),link));
+            generateAndSendToken(signUpRequest);
             return new AuthResponse("Please verify your email address to complete the registration process");
         }
         catch (Exception e) {
           return new AuthResponse("User registration failed Error : "+e.getMessage())  ;
         }
+    }
+
+    private void generateAndSendToken(SignUpRequest signUpRequest) {
+        String token = UUID.randomUUID().toString();
+        //generating token for session
+        ConfirmationToken confirmationToken=new ConfirmationToken(token, LocalDateTime.now(),LocalDateTime.now().plusMinutes(10),null,signUpRequest.getEmail());
+        confirmationTokenService.addToken(confirmationToken);
+        //sending email to user
+        String link = vconnectBaseUrl+"/auth/user/confirmToken?token=" + token;
+
+        emailSender.send(signUpRequest.getEmail(),buildEmail(signUpRequest.getName(),link));
     }
 
 
